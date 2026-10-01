@@ -80,10 +80,11 @@ class StationDataManager:
             raise ValueError("Station data not loaded.")
             
         query_point = np.radians([[lat, lng]])
-        # query returns (distances, indices). We want the first index of the first result.
+        # query returns (distances, indices). We want the exact integer index.
         dist, ind = self.tree.query(query_point, k=1)
         
-        return self.df.iloc[ind[0]]
+        # ind is a 2D array like [[index]], so ind[0][0] gets the scalar integer
+        return self.df.iloc[ind[0][0]]
 
 # Create a global instance that our API views will import
 station_db = StationDataManager()
