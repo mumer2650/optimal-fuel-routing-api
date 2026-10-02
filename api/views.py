@@ -42,6 +42,17 @@ class RouteOptimizationView(APIView):
                 finish_lat, finish_lng = GeocoderClient.geocode(finish)
             except ValueError as e:
                 return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                
+        # Assignment Requirement: Ensure locations are within the USA
+        # We use a loose geographic bounding box covering the Continental US, Alaska, and Hawaii
+        def is_in_usa(lat, lng):
+            return 18.0 <= lat <= 72.0 and -180.0 <= lng <= -65.0
+            
+        if not is_in_usa(start_lat, start_lng) or not is_in_usa(finish_lat, finish_lng):
+            return Response(
+                {"error": "Start and finish locations must be within the USA."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
             
         try:
             # Phase 2: Fetch Route from OSRM
