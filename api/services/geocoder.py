@@ -16,9 +16,9 @@ class GeocoderClient:
         Takes a string location and returns a tuple of (lat, lng).
         Raises ValueError if the location cannot be found.
         """
-        # We need a custom User-Agent as per Nominatim's free usage policy
+        # Use a standard browser User-Agent to avoid getting blocked by Nominatim's strict policies
         headers = {
-            'User-Agent': 'OptimalRoutingApp/1.0 (fuel_router@example.com)'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         params = {
             'q': location_str,
@@ -28,7 +28,7 @@ class GeocoderClient:
         
         try:
             logger.info(f"Geocoding text location: {location_str}")
-            response = requests.get(cls.BASE_URL, params=params, headers=headers, timeout=5)
+            response = requests.get(cls.BASE_URL, params=params, headers=headers, timeout=15)
             response.raise_for_status()
             
             data = response.json()

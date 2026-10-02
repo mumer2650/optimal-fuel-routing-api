@@ -45,6 +45,8 @@ A high-performance Django REST API that calculates the absolute mathematically o
 
 ## ⚙️ How to Run Locally
 
+### Method 1: Standard (Mac/Linux/Windows)
+
 1. **Install Dependencies**
    ```bash
    pip install django djangorestframework requests pandas numpy scikit-learn polyline
@@ -58,3 +60,10 @@ A high-performance Django REST API that calculates the absolute mathematically o
 
 3. **Test it!**
    Navigate to: `http://127.0.0.1:8000/api/route/?start=Austin,TX&finish=Chicago,IL`
+
+### Method 2: Windows Quick Start (Recommended)
+
+If you are on Windows, you can use the provided batch files for a 1-click setup:
+1. Double-click `setup.bat` (This creates a virtual environment and installs everything).
+2. Double-click `run_server.bat` (This starts the API).
+3. **Test it!** Navigate to: `http://127.0.0.1:8000/api/route/?start=Austin,TX&finish=Chicago,IL`
