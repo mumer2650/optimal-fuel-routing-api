@@ -38,8 +38,7 @@ A high-performance Django REST API that calculates the absolute mathematically o
 
 ## 📸 Postman Demo
 
-> **[ 📌 TODO: INSERT YOUR POSTMAN SCREENSHOT HERE ]**
-> *(A screenshot showing a successful 200 OK response with the JSON payload)*
+![Postman API Test](data/image.png)
 
 ---
 
