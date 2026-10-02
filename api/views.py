@@ -4,6 +4,7 @@ from rest_framework import status
 from .services.osrm_client import OSRMClient
 from .services.routing_engine import RoutingEngine
 from .services.optimizer import FuelOptimizer
+from .services.geocoder import GeocoderClient
 import logging
 
 logger = logging.getLogger(__name__)
@@ -25,13 +26,22 @@ class RouteOptimizationView(APIView):
             )
             
         try:
+            # Try to parse as coordinates first
             start_lat, start_lng = map(float, start.split(','))
+        except ValueError:
+            # Fallback to geocoding if it's a string (e.g., "Austin, TX")
+            try:
+                start_lat, start_lng = GeocoderClient.geocode(start)
+            except ValueError as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                
+        try:
             finish_lat, finish_lng = map(float, finish.split(','))
         except ValueError:
-            return Response(
-                {"error": "Coordinates must be in 'lat,lng' format (e.g., 34.05,-118.24)."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            try:
+                finish_lat, finish_lng = GeocoderClient.geocode(finish)
+            except ValueError as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
             # Phase 2: Fetch Route from OSRM
