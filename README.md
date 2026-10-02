@@ -66,3 +66,9 @@ If you are on Windows, you can use the provided batch files for a 1-click setup:
 1. Double-click `setup.bat` (This creates a virtual environment and installs everything).
 2. Double-click `run_server.bat` (This starts the API).
 3. **Test it!** Navigate to: `http://127.0.0.1:8000/api/route/?start=Austin,TX&finish=Chicago,IL`
+
+---
+
+## 📬 Contact
+**Author**: Muhammad Umer  
+**Email**: muhammad.umer2650@gmail.com
