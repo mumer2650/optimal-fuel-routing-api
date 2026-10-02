@@ -57,10 +57,10 @@ class RouteOptimizationView(APIView):
             
             # Phase 6: Construct Final JSON Payload
             response_data = {
-                "route_geometry": geometry,
                 "total_distance_miles": round(total_distance, 2),
                 "total_fuel_cost_usd": optimization_result['total_fuel_cost_usd'],
-                "fuel_stops": optimization_result['fuel_stops']
+                "fuel_stops": optimization_result['fuel_stops'],
+                "route_geometry": geometry
             }
             
             return Response(response_data, status=status.HTTP_200_OK)
